@@ -10,13 +10,12 @@ class LoadBalancer:
         hash_value = key%360
         return hash_value
 
-    def Map_ServerIP(self,Server_Name,Server_IP):
+    def Map_ServerIP(self,Server_Name,Server_IP,Server_Port):
         for Replica in range(self.Server_Replicas):
             Server_Name=Server_Name+str(Replica)
             Ascii_Value = self.Ascii(Server_Name)
             Hash_Key = self.Hash_Value(Ascii_Value)
-            print(Hash_Key)
-            self.Server_Map[Hash_Key]=Server_IP
+            self.Server_Map[Hash_Key]=[Server_IP,Server_Port]
             bisect.insort(self.Server_Ids, Hash_Key)
     
     def Get_ServerIP(self, request):
@@ -27,7 +26,7 @@ class LoadBalancer:
             Index=0
         ServerIP_Key=self.Server_Ids[Index]
         ServerIP=self.Server_Map[ServerIP_Key]
-        return ServerIP
+        return ServerIP[0],ServerIP[1]
     
     def Delete_ServerIP(self,Server_Name):
         for Replica in range(self.Server_Replicas):

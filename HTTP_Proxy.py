@@ -2,7 +2,7 @@ import socket
 import threading
 import logging
 
-class Proxy_Server:
+class HTTP_Proxy:
     def __init__(self):
         Server_Adderess=""
         Server_Port = int(input("Please provide port"))
@@ -59,6 +59,3 @@ class Proxy_Server:
             return Socket
         except Exception as e:
             print("Error Occured in Socket library")
-
-
-p=Proxy_Server()

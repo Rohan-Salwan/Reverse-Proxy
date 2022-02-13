@@ -3,26 +3,26 @@ import logging
 from cache import Cache
 
 
+logger=logging
+logger.basicConfig(filename="Logs.txt",level=logging.DEBUG,format = '%(asctime)s %(levelname)s %(name)s %(message)s')
+
 
 def Inizialize_LoadBalancer():
     try:
-        Load_Balancer=LoadBalancer.LoadBalancer()
+        print("please provide server replicas for load balancer")
+        replicas=RetrieveInputFromUser(type=int)
+        Load_Balancer=LoadBalancer.LoadBalancer(replicas)
+        print("Please Provide ServerName below")
+        ServerName=RetrieveInputFromUser()
+        print("Please Provide Server_IP below")
+        Server_IP=RetrieveInputFromUser()
+        print("Please Provide Server_Port below")
+        Server_Port=RetrieveInputFromUser(type=int)
+        Load_Balancer.Map_ServerIP(ServerName,Server_IP,Server_Port)
         return Load_Balancer
     except Exception as e:
         print("Error Occured in LoadBalancer Module")
-
-def ConnectServerToReverseProxy(Load_Balancer):
-    print("Please Provide ServerName below")
-    ServerName=RetrieveInputFromUser()
-    print("Please Provide Server_IP below")
-    Server_IP=RetrieveInputFromUser()
-    print("Please Provide Server_Port below")
-    Server_Port=RetrieveInputFromUser(type=int)
-    try:
-        return Load_Balancer.Map_ServerIP(ServerName,Server_IP,Server_Port)  
-    except Exception as e:
-        print("Error Occured in LoadBalancer Module")
-
+        logger.debug(e)
 
 def Primary_Parser(response):
         response=LinksParser(response)
@@ -44,7 +44,7 @@ def ImageParser(response):
 def RetrieveInputFromUser(type=str):
     while True:
         try:
-            User_Input=type(input("Please Provide Server Name"))
+            User_Input=type(input())
             return User_Input
         except Exception as e:
             print("Invalid Input")
@@ -55,3 +55,4 @@ def Initialize_Cache():
         return cache
     except Exception as e:
         print("Error Occured in Cache Module")
+        logger.debug(e)

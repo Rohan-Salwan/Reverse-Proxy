@@ -26,7 +26,7 @@ class Cache:
                 self.head=self.head.next
                 self.head.prev=None
                 self.count-=1
-                self.Map.pop(key,None)
+                del self.Map[key]
             # adding pages according to its requesting priority
             self.tail.next=node
             self.tail.next.prev=self.tail
@@ -66,4 +66,4 @@ class Cache:
         else:
             node.prev.next=node.next
             node.next.prev=node.prev
-        self.Map.pop(key,None)
+        del self.Map[key]

@@ -34,7 +34,7 @@ class LoadBalancer:
             Ascii_Value=self.Ascii(Server_Name)
             Hash_Key=self.Hash_Value(Ascii_Value)
             try:
-                self.Server_Map.pop(Hash_Key,None)
+                del self.Server_Map[Hash_Key]
                 self.Server_Ids.remove(Hash_Key)
             except Exception as e:
                 print("ServerIP is Invalid")    

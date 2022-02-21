@@ -14,3 +14,32 @@ Make initiating takedowns and removing malware easier.
 
 * Analyze many incoming requests via a single public IP address, delivering them to multiple web-servers within the local area network.
 
+Installing
+----------
+
+Use Clone Command To Install Reverse-Proxy:
+
+    $ git clone https://github.com/Rohan-Salwan/Reverse-Proxy.git
+
+For Installing Dependencies:
+
+    $ pip install -r requirements.txt
+
+Contribution
+------------
+
+Firstly Activate Environment:
+
+    $ source Env/bin/activate
+
+Secondly Install Dependencies:
+
+    $ pip install -r requirements.txt
+
+Always Run Tests:
+
+    $ pytest Test_Cache.py
+    $ pytest Test_LoadBalancer.py
+    $ pytest Test_Security.py
+    $ pytest Test_Utility.py
+
